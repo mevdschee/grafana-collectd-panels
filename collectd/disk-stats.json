@@ -685,6 +685,7 @@
                 }
               ],
               "measurement": "disk_read",
+              "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
               "resultFormat": "time_series",
@@ -746,6 +747,7 @@
                 }
               ],
               "measurement": "disk_write",
+              "orderByTime": "ASC",
               "policy": "default",
               "refId": "B",
               "resultFormat": "time_series",
@@ -861,7 +863,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "node01",
           "value": "node01"
         },
@@ -885,7 +886,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "vda2",
           "value": "vda2"
         },
@@ -909,7 +909,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -939,5 +939,5 @@
   },
   "timezone": "browser",
   "title": "Disk stats",
-  "version": 1
+  "version": 2
 }
