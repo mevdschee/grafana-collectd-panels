@@ -1,4 +1,34 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_COLLECTD",
+      "label": "collectd",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.1"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": []
   },
@@ -6,7 +36,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "hideControls": false,
-  "id": 2,
+  "id": null,
   "links": [],
   "refresh": false,
   "rows": [
@@ -19,7 +49,7 @@
           "bars": true,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "collectd",
+          "datasource": "${DS_COLLECTD}",
           "description": "bandwith (per 10 sec) on $host / $interface",
           "fill": 8,
           "id": 5,
@@ -45,18 +75,6 @@
           "points": false,
           "renderer": "flot",
           "repeat": "interface",
-          "scopedVars": {
-            "host": {
-              "selected": true,
-              "text": "node01",
-              "value": "node01"
-            },
-            "interface": {
-              "selected": true,
-              "text": "eth0",
-              "value": "eth0"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 12,
@@ -256,56 +274,16 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "node01",
-          "value": "node01"
-        },
-        "datasource": "collectd",
+        "current": {},
+        "datasource": "${DS_COLLECTD}",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "host",
-        "options": [
-          {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": true,
-            "text": "node01",
-            "value": "node01"
-          },
-          {
-            "selected": false,
-            "text": "node02",
-            "value": "node02"
-          },
-          {
-            "selected": false,
-            "text": "node03",
-            "value": "node03"
-          },
-          {
-            "selected": false,
-            "text": "node04",
-            "value": "node04"
-          },
-          {
-            "selected": false,
-            "text": "node05",
-            "value": "node05"
-          },
-          {
-            "selected": false,
-            "text": "node06",
-            "value": "node06"
-          }
-        ],
+        "options": [],
         "query": "SHOW TAG VALUES WITH KEY=host",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "sort": 0,
         "tagValuesQuery": "",
@@ -316,36 +294,16 @@
       },
       {
         "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "eth0",
-          "value": "eth0"
-        },
-        "datasource": "collectd",
+        "current": {},
+        "datasource": "${DS_COLLECTD}",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "interface",
-        "options": [
-          {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": true,
-            "text": "eth0",
-            "value": "eth0"
-          },
-          {
-            "selected": false,
-            "text": "lo",
-            "value": "lo"
-          }
-        ],
+        "options": [],
         "query": "SHOW TAG VALUES FROM \"interface_rx\" WITH KEY = \"instance\"",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "sort": 0,
         "tagValuesQuery": "",
@@ -357,8 +315,8 @@
     ]
   },
   "time": {
-    "from": "2017-07-21T08:53:27.812Z",
-    "to": "2017-07-21T09:00:18.980Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -387,5 +345,5 @@
   },
   "timezone": "",
   "title": "Network bandwidth",
-  "version": 25
+  "version": 26
 }
