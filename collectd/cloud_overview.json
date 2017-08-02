@@ -1,34 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_COLLECTD",
-      "label": "collectd",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "influxdb",
-      "pluginName": "InfluxDB"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.4.1"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "influxdb",
-      "name": "InfluxDB",
-      "version": "1.0.0"
-    }
-  ],
   "annotations": {
     "list": []
   },
@@ -36,7 +6,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "hideControls": false,
-  "id": null,
+  "id": 1,
   "links": [],
   "refresh": "5s",
   "rows": [
@@ -82,7 +52,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 1,
           "interval": ">10s",
@@ -117,7 +87,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -130,7 +100,7 @@
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "\nSELECT 100-DERIVATIVE(mean(\"value\"),1s) AS \"mean_value\" FROM \"collectd\".\"thirty_days\".\"cpu_value\" WHERE $timeFilter AND \"type\"='cpu' AND \"type_instance\"='idle' GROUP BY time($__interval), \"host\"\n\nfill(none)\n\n",
+              "query": "\nSELECT 100-DERIVATIVE(mean(\"value\"),1s) AS \"mean_value\" FROM \"cpu_value\" WHERE $timeFilter AND \"type\"='cpu' AND \"type_instance\"='idle' GROUP BY time($interval), \"host\"\n\nfill(none)\n\n",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -233,7 +203,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 4,
           "interval": ">10s",
@@ -268,7 +238,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -281,7 +251,7 @@
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "\nSELECT 100-DERIVATIVE(mean(\"value\"),1s) AS \"mean_value\" FROM \"collectd\".\"thirty_days\".\"cpu_value\" WHERE $timeFilter AND \"type\"='cpu' AND \"type_instance\"='idle' GROUP BY time($__interval), \"host\", \"instance\"\n\nfill(none)\n\n",
+              "query": "\nSELECT 100-DERIVATIVE(mean(\"value\"),1s) AS \"mean_value\" FROM \"cpu_value\" WHERE $timeFilter AND \"type\"='cpu' AND \"type_instance\"='idle' GROUP BY time($interval), \"host\", \"instance\"\n\nfill(none)\n\n",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -356,7 +326,263 @@
     },
     {
       "collapse": false,
-      "height": 268,
+      "height": 249,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "collectd",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 11,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "$tag_host",
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "host"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "memory_value",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "type_instance",
+                  "operator": "=",
+                  "value": "used"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "collectd",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "id": 12,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "$tag_host",
+              "dsType": "influxdb",
+              "expr": "",
+              "groupBy": [
+                {
+                  "params": [
+                    "$interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "host"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "intervalFactor": 2,
+              "measurement": "load_shortterm",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Load Average (short)",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 238,
       "panels": [
         {
           "alert": {
@@ -396,7 +622,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 2,
           "interval": ">10s",
@@ -432,7 +658,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -577,7 +803,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 3,
           "interval": ">10s",
@@ -613,7 +839,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -737,7 +963,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 5,
           "interval": ">10s",
@@ -772,7 +998,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -870,7 +1096,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 6,
           "interval": ">10s",
@@ -905,7 +1131,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -1015,7 +1241,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 7,
           "interval": ">10s",
@@ -1023,6 +1249,8 @@
             "alignAsTable": true,
             "avg": false,
             "current": false,
+            "hideEmpty": false,
+            "hideZero": true,
             "max": false,
             "min": false,
             "rightSide": true,
@@ -1050,7 +1278,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -1154,7 +1382,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 8,
           "interval": ">10s",
@@ -1162,6 +1390,7 @@
             "alignAsTable": true,
             "avg": false,
             "current": false,
+            "hideZero": true,
             "max": false,
             "min": false,
             "rightSide": true,
@@ -1189,7 +1418,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -1305,7 +1534,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 9,
           "interval": ">10s",
@@ -1313,6 +1542,7 @@
             "alignAsTable": true,
             "avg": false,
             "current": false,
+            "hideZero": true,
             "max": false,
             "min": false,
             "rightSide": true,
@@ -1340,7 +1570,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -1444,7 +1674,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_COLLECTD}",
+          "datasource": "collectd",
           "fill": 1,
           "id": 10,
           "interval": ">10s",
@@ -1452,6 +1682,7 @@
             "alignAsTable": true,
             "avg": false,
             "current": false,
+            "hideZero": true,
             "max": false,
             "min": false,
             "rightSide": true,
@@ -1479,7 +1710,7 @@
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    "$interval"
                   ],
                   "type": "time"
                 },
@@ -1624,5 +1855,5 @@
   },
   "timezone": "",
   "title": "Cloud Overview",
-  "version": 19
+  "version": 4
 }
