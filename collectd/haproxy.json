@@ -1284,13 +1284,16 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": null,
+          "decimals": 0,
           "fill": 1,
           "id": 10,
           "legend": {
+            "alignAsTable": true,
             "avg": false,
             "current": false,
             "max": false,
             "min": false,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": false
@@ -1307,7 +1310,7 @@
           "spaceLength": 10,
           "span": 6,
           "stack": false,
-          "steppedLine": true,
+          "steppedLine": false,
           "targets": [
             {
               "alias": "$tag_type_instance",
@@ -1351,9 +1354,9 @@
                   },
                   {
                     "params": [
-                      "1s"
+                      "10s"
                     ],
-                    "type": "derivative"
+                    "type": "non_negative_derivative"
                   }
                 ]
               ],
@@ -1381,7 +1384,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Panel Title",
+          "title": "Miscellaneous",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1410,7 +1413,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
+              "show": false
             }
           ]
         }
@@ -2154,8 +2157,8 @@
     ]
   },
   "time": {
-    "from": "2017-08-18T13:19:54.383Z",
-    "to": "2017-08-18T13:24:15.271Z"
+    "from": "2017-09-12T13:15:55.928Z",
+    "to": "2017-09-12T13:25:55.928Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2184,5 +2187,5 @@
   },
   "timezone": "",
   "title": "HAProxy",
-  "version": 18
+  "version": 19
 }

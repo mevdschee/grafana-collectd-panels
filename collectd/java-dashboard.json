@@ -8,7 +8,7 @@
   "hideControls": false,
   "id": 14,
   "links": [],
-  "refresh": "5s",
+  "refresh": false,
   "rows": [
     {
       "collapse": false,
@@ -680,7 +680,7 @@
                   },
                   {
                     "params": [
-                      "1s"
+                      "10s"
                     ],
                     "type": "non_negative_derivative"
                   }
@@ -2244,8 +2244,8 @@
     ]
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2017-09-12T13:21:52.062Z",
+    "to": "2017-09-12T13:30:42.036Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2274,5 +2274,5 @@
   },
   "timezone": "",
   "title": "Java Dashboard",
-  "version": 24
+  "version": 25
 }
